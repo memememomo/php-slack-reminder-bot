@@ -1,6 +1,6 @@
 <?php
 
-require_once './include/const.php';
+require_once dirname(__FILE__).'/include/const.php';
 
 $c = bootstrap();
 
@@ -8,7 +8,7 @@ $Task = $c->_m('Task');
 $TaskDaily = $c->_m('TaskDaily');
 
 $dt = new DateTime();
-$year = $dt->format('y');
+$year = $dt->format('Y');
 $mon  = $dt->format('m');
 $day  = $dt->format('d');
 

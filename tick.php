@@ -1,6 +1,6 @@
 <?php
 
-require_once './include/const.php';
+require_once dirname(__FILE__).'/include/const.php';
 
 $c = bootstrap();
 
