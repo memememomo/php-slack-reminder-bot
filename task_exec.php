@@ -9,6 +9,11 @@ if (!$c->param('text')) {
     exit;
 }
 
+if (mb_strlen($c->param('text')) > 255) {
+    echo "登録できる文字数は255文字までです。";
+    exit;
+}
+
 $values = array();
 $values['text'] = $c->param('text');
 $values['remind_at'] = sprintf("%04d-%02d-%02d %02d:%02d:00", $c->param('year'), $c->param('mon'), $c->param('day'), $c->param('hour'), $c->param('min'));
