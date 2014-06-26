@@ -1,0 +1,61 @@
+{extends file="layouts/default.tmpl"}
+{block name="content"}
+<h2>Task</h2>
+
+<form action="task_daily_exec.php" method="post">
+<table>
+  <tr>
+    <th>文言</th>
+    <td>
+      <input type="text" name="text" />
+    </td>
+  </tr>
+  <tr>
+    <th>通知日時</th>
+    <td>
+      <select name="hour" style="width: 85px;">
+        {foreach $hours as $hour}
+        <option value="{$hour}">{$hour}</option>
+        {/foreach}
+      </select>時
+      <select name="min" style="width: 85px;">
+        {foreach $mins as $min}
+        <option value="{$min}">{$min}</option>
+        {/foreach}
+      </select>分
+    </td>
+  </tr>
+</table>
+<input type="submit" value="登録">
+</form>
+
+<table class="table table-striped">
+  <tr>
+    <th>文言</th>
+    <th>通知時刻</th>
+    <th>削除</th>
+  </tr>
+  {foreach $tasks as $task}
+  <tr>
+    <td>{$task.text}</td>
+    <td>{$task.remind_hour}時{$task.remind_min}分</td>
+    <td>
+      <input type="button" value="削除" onclick="do_delete('{$task.id}');"/>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+
+<script type="text/javascript">
+
+function do_delete(task_id) {
+  if (!confirm('削除しても良いですか?')) {
+    return false;
+  }
+
+  location.href = "task_daily_del.php?id=" + task_id;
+}
+
+</script>
+
+{/block}

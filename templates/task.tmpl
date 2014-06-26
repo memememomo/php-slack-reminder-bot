@@ -1,0 +1,76 @@
+{extends file="layouts/default.tmpl"}
+{block name="content"}
+<h2>Task</h2>
+
+<form action="task_exec.php" method="post">
+<table>
+  <tr>
+    <th>文言</th>
+    <td>
+      <input type="text" name="text" />
+    </td>
+  </tr>
+  <tr>
+    <th>通知日時</th>
+    <td>
+      <select name="year" style="width: 95px;">
+        {foreach $years as $year}
+        <option value="{$year}"{if $dt->format('Y') == $year} selected{/if}>{$year}</option>
+        {/foreach}
+      </select>年
+      <select name="mon" style="width: 85px;">
+        {foreach $mons as $mon}
+        <option value="{$mon}"{if $dt->format('m') == $mon} selected{/if}>{$mon}</option>
+        {/foreach}
+      </select>月
+      <select name="day" style="width: 85px;">
+        {foreach $days as $day}
+        <option value="{$day}"{if $dt->format('d') == $day} selected{/if}>{$day}</option>
+        {/foreach}
+      </select>日
+      <select name="hour" style="width: 85px;">
+        {foreach $hours as $hour}
+        <option value="{$hour}">{$hour}</option>
+        {/foreach}
+      </select>時
+      <select name="min" style="width: 85px;">
+        {foreach $mins as $min}
+        <option value="{$min}">{$min}</option>
+        {/foreach}
+      </select>分
+    </td>
+  </tr>
+</table>
+<input type="submit" value="登録">
+</form>
+
+<table class="table table-striped">
+  <tr>
+    <th>文言</th>
+    <th>通知時刻</th>
+    <th>削除</th>
+  </tr>
+  {foreach $tasks as $task}
+  <tr>
+    <td>{$task.text}</td>
+    <td>{$task.remind_at}</td>
+    <td>
+      <input type="button" value="削除" onclick="do_delete('{$task.id}');"/>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+
+<script type="text/javascript">
+
+function do_delete(task_id) {
+  if (!confirm('削除しても良いですか?')) {
+    return false;
+  }
+
+  location.href = "task_del.php?id=" + task_id;
+}
+
+</script>
+
+{/block}
