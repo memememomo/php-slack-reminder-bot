@@ -27,7 +27,7 @@ class Model_Tick extends Model_Base
         }
 
         $text = implode("\n", $texts);
-        $text = "@channel\n" . $text;
+        $text = "<!channel>\n" . $text;
 
         $Slack->chat_postMessage($channel, $text, $username);
     }
