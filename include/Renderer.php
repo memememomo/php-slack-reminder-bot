@@ -20,6 +20,7 @@ class Renderer {
         $smarty->config_dir   = $tmpldir."configs/";
         $smarty->cache_dir    = $tmpldir."cache/";
         $smarty->caching      = false;
+        $smarty->default_modifiers = array('escape');
 
         // PHPのファイル名から対応するテンプレートを自動判別
         if ( !$templatefile ) {
